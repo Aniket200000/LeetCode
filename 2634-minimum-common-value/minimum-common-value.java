@@ -1,3 +1,5 @@
+import java.util.HashSet;
+
 public class Solution {
     public int getCommon(int[] nums1, int[] nums2) {
         HashSet<Integer> set1 = new HashSet<>();
@@ -13,6 +15,6 @@ public class Solution {
             }
         }
 
-        return set2.isEmpty() ? -1 : set2.stream().min(Integer::compareTo).orElseThrow();
+        return set2.isEmpty() ? -1 : set2.stream().min(Integer::compareTo).orElse(-1);
     }
 }
