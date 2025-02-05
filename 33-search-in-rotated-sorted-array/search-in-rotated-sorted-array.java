@@ -5,7 +5,7 @@ class Solution {
         while(low <= high){
             mid = low + (high-low)/2; // Avoid overflow
 
-           if(a[mid] == target){////Target found at mid
+           if(a[mid] == target){//Target found at mid
             return mid;
            }
 
