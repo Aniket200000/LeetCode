@@ -9,10 +9,9 @@ class Solution {
                 return true;
             }
 
-            else if(nums[low]== nums[mid] && nums[mid]== nums[high]){
-                low++;
+            else if (nums[mid] == nums[high]) {
                 high--;
-            }
+            } 
 
             else if(nums[low] <= nums[mid]){
                 if(nums[low] <= target && target < nums[mid]){
