@@ -1,6 +1,3 @@
-/*
- * \U0001f680 Leetcode 2523: Closest Prime Numbers in Range
- */
 class Solution {
     public int[] closestPrimes(int left, int right) {
         // ✅ Special Case: If range includes 2 and 3, return {2,3}.
