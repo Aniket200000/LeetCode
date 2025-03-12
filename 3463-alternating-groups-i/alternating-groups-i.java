@@ -4,7 +4,7 @@ class Solution {
         int n = colors.length;
         
 
-        for(int i = 0 ;  i < n ; i++ ){ // Expanding the window by moving right
+        for(int i = 0 ;  i < n ; i++ ){
 
             if(colors[i % n] != colors[(i - 1 + n)% n]){
                 if(colors[i % n] != colors[(i + 1)% n]){
