@@ -5,8 +5,8 @@ class Solution {
         int right = nums.length - 1;
         int maxSum = 0;
 
-        while(left < right) {
-            maxSum = Math.max(maxSum, nums[left] + nums[right]);
+        while(left < right){   
+            maxSum = Math.max(nums[left]+nums[right] , maxSum);         
             left++;
             right--;
         }
