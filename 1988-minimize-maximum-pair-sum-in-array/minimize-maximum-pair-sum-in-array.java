@@ -5,11 +5,10 @@ class Solution {
         int right = nums.length - 1;
         int maxSum = 0;
 
-        while(left < right){
-            int sum = nums[left]+nums[right];
+        while(left < right) {
+            maxSum = Math.max(maxSum, nums[left] + nums[right]);
             left++;
             right--;
-            maxSum = Math.max(sum , maxSum);
         }
         return maxSum;
     }
