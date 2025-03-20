@@ -1,30 +1,23 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
     public List<List<Integer>> generate(int numRows) {
-        List<List<Integer>> result = new ArrayList<>();
-        
-        if(numRows == 0) return result;
+        List<List<Integer>> ans = new ArrayList<>();
+        ans.add(new ArrayList<>());
+        ans.get(0).add(1); // First row is always [1]
 
-        List<Integer> firstRow = new ArrayList<>();
-        firstRow.add(1);
-        result.add(firstRow);
-        if(numRows == 1) return result;
+        for (int row = 1; row < numRows; row++) {
+            List<Integer> r = new ArrayList<>();
+            List<Integer> prevList = ans.get(row - 1);
 
-        for(int i = 1; i < numRows ; i++ ){
-            List<Integer> previousList = result.get(i-1);
-            
-            List<Integer> row = new ArrayList<>();
-            row.add(1);
-
-            for(int j = 0; j < i-1; j++){
-                row.add(previousList.get(j) + previousList.get(j+1));
+            r.add(1); // First element is always 1
+            for (int j = 1; j < row; j++) {
+                r.add(prevList.get(j - 1) + prevList.get(j)); // Sum of two above
             }
-
-            row.add(1);
-
-            result.add(row);
+            r.add(1); // Last element is always 1
+            ans.add(r);
         }
-
-        return result;
-
+        return ans;
     }
 }
