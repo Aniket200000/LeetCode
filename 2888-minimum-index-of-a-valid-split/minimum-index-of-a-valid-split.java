@@ -4,20 +4,22 @@ class Solution {
     public int minimumIndex(List<Integer> nums) {
         int n = nums.size();
         
-        Map<Integer, Integer> freqMap = new HashMap<>();
+        int majorityElement = -1, count = 0;
         for (int num : nums) {
-            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
+            if (count == 0) {
+                majorityElement = num;
+            }
+            count += (num == majorityElement) ? 1 : -1;
         }
 
-        int majorityElement = -1, maxCount = 0;
-        for (Map.Entry<Integer, Integer> entry : freqMap.entrySet()) {
-            if (entry.getValue() > maxCount) {
-                majorityElement = entry.getKey();
-                maxCount = entry.getValue();
+        int totalCount = 0;
+        for (int num : nums) {
+            if (num == majorityElement) {
+                totalCount++;
             }
         }
 
-        int leftCount = 0, rightCount = maxCount;
+        int leftCount = 0, rightCount = totalCount;
         for (int i = 0; i < n - 1; i++) {
             if (nums.get(i) == majorityElement) {
                 leftCount++;
@@ -29,6 +31,6 @@ class Solution {
             }
         }
 
-        return -1; 
+        return -1;  
     }
 }
