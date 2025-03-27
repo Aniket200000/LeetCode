@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     public int minimumIndex(List<Integer> nums) {
         int n = nums.size();
