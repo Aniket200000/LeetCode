@@ -1,34 +1,32 @@
 class Solution {
     public int minimumIndex(List<Integer> nums) {
         int n = nums.size();
-        
-        int majorityElement = -1, count = 0;
+        int max = -1, count = 0;
+
         for (int num : nums) {
-            if (count == 0) {
-                majorityElement = num;
-            }
-            count += (num == majorityElement) ? 1 : -1;
+            if (count == 0)
+                max = num;
+            count += (num == max) ? 1 : -1;
         }
 
         int totalCount = 0;
         for (int num : nums) {
-            if (num == majorityElement) {
+            if (num == max)
                 totalCount++;
-            }
         }
 
-        int leftCount = 0, rightCount = totalCount;
+        int left = 0, right = totalCount;
+
         for (int i = 0; i < n - 1; i++) {
-            if (nums.get(i) == majorityElement) {
-                leftCount++;
-                rightCount--;
+            if (nums.get(i) == max) {
+                left++;
+                right--;
             }
 
-            if (leftCount * 2 > (i + 1) && rightCount * 2 > (n - i - 1)) {
+            if (left * 2 > (i + 1) && right * 2 > (n - i - 1)) {
                 return i;
             }
         }
-
-        return -1;  
+        return -1;
     }
 }
