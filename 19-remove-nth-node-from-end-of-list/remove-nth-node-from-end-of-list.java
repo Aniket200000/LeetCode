@@ -25,7 +25,7 @@ class Solution {
     }
 
     ListNode tail = head;
-    for (int i = 0; i < count - n - 1; i++) {
+    for (int i = 1; i < count - n; i++) {
         tail = tail.next;
     }
     
