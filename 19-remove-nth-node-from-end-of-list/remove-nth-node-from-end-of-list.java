@@ -29,10 +29,7 @@ class Solution {
         for(int i = 1 ; i < count - n ; i++){
             tail  = tail.next;
         }
-
-        if(tail.next != null){
-            tail.next = tail.next.next;
-        }
+        tail.next = tail.next.next;
         return head;
     }
 }
