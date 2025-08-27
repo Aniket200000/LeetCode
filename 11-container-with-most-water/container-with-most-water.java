@@ -1,8 +1,9 @@
 class Solution {
     public int maxArea(int[] height) {
+        int n = height.length - 1;
         int maxWater = 0;
         int left = 0 ;
-        int right = height.length-1;
+        int right = n;
 
         while(left < right){
             int width = right - left ;
