@@ -1,26 +1,39 @@
-class Food implements Comparable<Food> {
-    int r; String n;
-    Food(int r, String n) { this.r = r; this.n = n; }
-    public int compareTo(Food o) { return r == o.r ? n.compareTo(o.n) : o.r - r; }
-}
-
 class FoodRatings {
-    Map<String, Integer> fr = new HashMap<>();
-    Map<String, String> fc = new HashMap<>();
-    Map<String, PriorityQueue<Food>> cf = new HashMap<>();
-    public FoodRatings(String[] f, String[] c, int[] r) {
-        for (int i = 0; i < f.length; i++) {
-            fr.put(f[i], r[i]); fc.put(f[i], c[i]);
-            cf.computeIfAbsent(c[i], k -> new PriorityQueue<>()).add(new Food(r[i], f[i]));
+    Map<String, Integer> foodRating = new HashMap<>();
+    Map<String, String> foodCuisine = new HashMap<>();
+    Map<String, PriorityQueue<Food>> cuisineHeap = new HashMap<>();
+
+    class Food implements Comparable<Food> {
+        int rating; String name;
+        Food(int r, String n) { rating = r; name = n; }
+        public int compareTo(Food o) {
+            if (rating != o.rating) return o.rating - rating; 
+            return name.compareTo(o.name);
         }
     }
-    public void changeRating(String f, int nr) {
-        fr.put(f, nr);
-        cf.get(fc.get(f)).add(new Food(nr, f));
+
+    public FoodRatings(String[] foods, String[] cuisines, int[] ratings) {
+        for (int i = 0; i < foods.length; i++) {
+            foodRating.put(foods[i], ratings[i]);
+            foodCuisine.put(foods[i], cuisines[i]);
+            cuisineHeap.computeIfAbsent(cuisines[i], k -> new PriorityQueue<>())
+                .add(new Food(ratings[i], foods[i]));
+        }
     }
-    public String highestRated(String c) {
-        PriorityQueue<Food> pq = cf.get(c);
-        while (fr.get(pq.peek().n) != pq.peek().r) pq.poll();
-        return pq.peek().n;
+
+    public void changeRating(String food, int newRating) {
+        String cuisine = foodCuisine.get(food);
+        foodRating.put(food, newRating);
+        cuisineHeap.get(cuisine).add(new Food(newRating, food));
+    }
+
+    public String highestRated(String cuisine) {
+        PriorityQueue<Food> heap = cuisineHeap.get(cuisine);
+        while (!heap.isEmpty()) {
+            Food top = heap.peek();
+            if (foodRating.get(top.name) == top.rating) return top.name;
+            heap.poll(); 
+        }
+        return ""; 
     }
 }
